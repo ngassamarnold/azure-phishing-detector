@@ -74,3 +74,16 @@ def analyze_documents(documents):
         ],
     )
     return poller.result()
+
+
+def detect_phishing(analysis_result):
+    # Vérifier les entités PII
+    if analysis_result.get("entities"):
+        for entity in analysis_result["entities"]:
+            if entity.get("category") in ["Email", "PhoneNumber", "CreditCardNumber", "BankAccountNumber"]:
+                return True
+    # Vérifier le sentiment
+    sentiment = analysis_result.get("sentiment", {}).get("sentiment", "")
+    if sentiment in ["negative", "neutral", "mixed"]:
+        return True
+    return False
