@@ -1,0 +1,5 @@
+requests
+msal
+python-dotenv
+azure-ai-textanalytics
+beautifulsoup4
