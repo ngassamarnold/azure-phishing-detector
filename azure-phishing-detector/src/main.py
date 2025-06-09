@@ -3,6 +3,7 @@
 from fetch_emails import get_access_token, get_latest_emails
 from analyze_with_azure import analyze_email
 from detect_phishing import detect_phishing  # Add this import if detect_phishing is defined in detect_phishing.py
+from sendTo import send_to_sentinel  # Adjusted import to match the function name in sendTo.py
 import os
 from dotenv import load_dotenv
 from bs4 import BeautifulSoup
@@ -41,6 +42,7 @@ def main():
         print("Key Phrases:", analysis["keyPhrases"])
 
         if detect_phishing(analysis):
+            send_to_sentinel(email_data)
             print("⚠️  Phishing suspecté !")
         else:
             print("✅ Pas de phishing détecté.")
